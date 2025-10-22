@@ -21,14 +21,14 @@ A clean, modern freelancer portfolio built with Next.js 15, Tailwind CSS, and Fr
 ## 🚀 Quick Start
 
 1. **Install dependencies**:
-   ```bash
-   npm install
-   ```
+```bash
+npm install
+```
 
 2. **Start development server**:
-   ```bash
-   npm run dev
-   ```
+```bash
+npm run dev
+```
 
 3. **Open your browser**:
    Visit [http://localhost:3000](http://localhost:3000)

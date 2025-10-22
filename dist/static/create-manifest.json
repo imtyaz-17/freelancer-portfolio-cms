@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "createdAt": "2025-10-22T08:55:53.372Z",
+  "createdAt": "2025-10-22T09:53:42.956Z",
   "workspaces": [
     {
       "name": "freelancer-portfolio-cms",
@@ -12,7 +12,7 @@
       "mediaLibrary": {
         "enabled": false
       },
-      "schema": "c10079ca.create-schema.json",
+      "schema": "a643a6e3.create-schema.json",
       "tools": "918180e5.create-tools.json"
     }
   ]

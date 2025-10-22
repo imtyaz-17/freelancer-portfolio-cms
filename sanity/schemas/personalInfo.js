@@ -142,6 +142,7 @@ export default defineType({
                   { title: 'LinkedIn', value: 'linkedin' },
                   { title: 'Twitter', value: 'twitter' },
                   { title: 'Email', value: 'email' },
+                  { title: 'WhatsApp', value: 'whatsapp' },
                   { title: 'Portfolio', value: 'portfolio' },
                   { title: 'Other', value: 'other' },
                 ],
