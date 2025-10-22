@@ -1,6 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
+import Image from 'next/image'
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -68,10 +69,12 @@ export default function ServicesSection({ data }) {
                 <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 p-8 border border-white/20 h-full group-hover:scale-105 group-hover:bg-white/90">
                   {/* Service Icon */}
                   <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-blue-500 rounded-2xl flex items-center justify-center mb-6 group-hover:from-purple-600 group-hover:to-blue-600 transition-all duration-300 shadow-lg">
-                    {service.icon ? (
-                      <img
-                        src={service.icon.asset?.url}
+                    {service.icon && service.icon.asset?.url ? (
+                      <Image
+                        src={service.icon.asset.url}
                         alt={service.icon.alt || service.title}
+                        width={32}
+                        height={32}
                         className="w-8 h-8"
                       />
                     ) : (

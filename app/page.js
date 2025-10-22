@@ -1,5 +1,4 @@
 import { client } from '@/lib/sanity.client'
-import { urlFor } from '@/lib/sanity.client'
 import {
   personalInfoQuery,
   servicesQuery, 
