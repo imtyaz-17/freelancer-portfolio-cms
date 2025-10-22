@@ -1,9 +1,9 @@
 {
   "version": 2,
-  "createdAt": "2025-10-22T06:04:33.766Z",
+  "createdAt": "2025-10-22T08:55:53.372Z",
   "workspaces": [
     {
-      "name": "freelancer-portfolio",
+      "name": "freelancer-portfolio-cms",
       "title": "Freelancer Portfolio CMS",
       "basePath": "/studio",
       "projectId": "3bte25h4",

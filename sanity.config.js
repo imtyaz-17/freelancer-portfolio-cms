@@ -11,7 +11,7 @@ import faq from './sanity/schemas/faq'
 import processStep from './sanity/schemas/processStep'
 
 export default defineConfig({
-  name: 'freelancer-portfolio',
+  name: 'freelancer-portfolio-cms',
   title: 'Freelancer Portfolio CMS',
   projectId: '3bte25h4',
   dataset: 'production',
