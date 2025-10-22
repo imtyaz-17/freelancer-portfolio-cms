@@ -44,11 +44,6 @@ export default async function HomePage() {
           <div className="grid lg:grid-cols-5 gap-12 items-center">
             {/* Content */}
             <div className="text-center lg:text-left lg:col-span-3">
-              <div className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-purple-500/20 to-pink-500/20 backdrop-blur-sm border border-purple-500/30 rounded-full text-purple-300 text-sm font-medium mb-6">
-                <div className="w-2 h-2 bg-green-400 rounded-full mr-2 animate-pulse"></div>
-                Available for new projects
-              </div>
-              
               <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
                 <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent">
                   {personalInfo?.name || 'Your Name'}
@@ -172,6 +167,12 @@ export default async function HomePage() {
 
             {/* Visual Element */}
             <div className="relative lg:col-span-2">
+              {/* Available Status Indicator */}
+              <div className="absolute top-4 left-4 z-10 inline-flex items-center px-3 py-1.5 bg-gradient-to-r from-green-500/90 to-emerald-500/90 backdrop-blur-sm border border-green-400/50 rounded-full text-white text-xs font-medium shadow-lg">
+                <div className="w-2 h-2 bg-white rounded-full mr-2 animate-pulse"></div>
+                Available
+              </div>
+              
               <div className="w-full h-96 lg:h-[500px] bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-3xl backdrop-blur-sm border border-purple-500/30 flex items-center justify-center overflow-hidden">
                 {personalInfo?.profileImage ? (
                   <div className="relative w-full h-full">
