@@ -72,9 +72,9 @@ export default function TestimonialsSection({ data }) {
                   <div className="flex items-center space-x-4">
                     {/* Client Photo */}
                     <div className="w-12 h-12 rounded-full overflow-hidden flex-shrink-0">
-                      {testimonial.clientPhoto ? (
+                      {testimonial.clientPhoto && testimonial.clientPhoto.asset?.url ? (
                         <Image
-                          src={testimonial.clientPhoto.asset?.url}
+                          src={testimonial.clientPhoto.asset.url}
                           alt={testimonial.clientPhoto.alt || testimonial.clientName}
                           width={48}
                           height={48}

@@ -69,9 +69,9 @@ export default function ProjectsSection({ data }) {
                 <div className="bg-white/10 backdrop-blur-sm rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 overflow-hidden h-full border border-white/20 group-hover:bg-white/15">
                   {/* Project Image */}
                   <div className="relative h-48 overflow-hidden">
-                    {project.coverImage ? (
+                    {project.coverImage && project.coverImage.asset?.url ? (
                       <Image
-                        src={project.coverImage.asset?.url}
+                        src={project.coverImage.asset.url}
                         alt={project.coverImage.alt || project.title}
                         fill
                         className="object-cover group-hover:scale-105 transition-transform duration-300"

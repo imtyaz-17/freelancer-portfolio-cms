@@ -174,10 +174,10 @@ export default async function HomePage() {
               </div>
               
               <div className="w-full h-96 lg:h-[500px] bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-3xl backdrop-blur-sm border border-purple-500/30 flex items-center justify-center overflow-hidden">
-                {personalInfo?.profileImage ? (
+                {personalInfo?.profileImage && personalInfo.profileImage.asset?.url ? (
                   <div className="relative w-full h-full">
                     <Image
-                      src={urlFor(personalInfo.profileImage).width(600).height(600).url()}
+                      src={personalInfo.profileImage.asset.url}
                       alt={personalInfo.profileImage.alt || personalInfo.name || 'Profile Image'}
                       fill
                       className="object-cover rounded-3xl"
