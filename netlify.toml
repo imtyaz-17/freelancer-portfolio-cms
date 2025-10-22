@@ -1,15 +1,15 @@
 [build]
   command = "npm run build"
-  publish = "out"
+  publish = ".next"
 
 [build.environment]
   NODE_VERSION = "18"
 
-# Handle client-side routing for Next.js
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
+# Enable official Next.js support on Netlify (SSR, API routes, images, etc.)
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+
+# Do not add SPA catch-all redirects; the Next.js plugin handles routing
 
 # Headers for security and performance
 [[headers]]
