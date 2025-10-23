@@ -134,7 +134,7 @@ export default function ProjectsSection({ data }) {
           </motion.div>
 
           {/* Projects Carousel Container */}
-          <motion.div variants={itemVariants} className="relative">
+          <motion.div variants={itemVariants} className="relative group">
             <div className="relative overflow-hidden">
               {/* Carousel Track */}
               <div className="relative">
@@ -341,7 +341,7 @@ export default function ProjectsSection({ data }) {
                       onClick={prevSlide}
                       onMouseEnter={() => setIsAutoPlaying(false)}
                       onMouseLeave={() => setIsAutoPlaying(true)}
-                      className="absolute left-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full flex items-center justify-center text-white hover:bg-white/20 hover:border-purple-400/50 hover:shadow-lg hover:shadow-purple-500/25 transition-all duration-300 hover:scale-110 group z-10"
+                      className="absolute left-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full flex items-center justify-center text-white hover:bg-white/20 hover:border-purple-400/50 hover:shadow-lg hover:shadow-purple-500/25 transition-all duration-300 hover:scale-110 group z-10 opacity-0 group-hover:opacity-100"
                       aria-label="Previous projects"
                     >
                       <svg className="w-5 h-5 group-hover:scale-110 group-hover:text-purple-300 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2.5}>
@@ -353,7 +353,7 @@ export default function ProjectsSection({ data }) {
                       onClick={nextSlide}
                       onMouseEnter={() => setIsAutoPlaying(false)}
                       onMouseLeave={() => setIsAutoPlaying(true)}
-                      className="absolute right-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full flex items-center justify-center text-white hover:bg-white/20 hover:border-purple-400/50 hover:shadow-lg hover:shadow-purple-500/25 transition-all duration-300 hover:scale-110 group z-10"
+                      className="absolute right-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full flex items-center justify-center text-white hover:bg-white/20 hover:border-purple-400/50 hover:shadow-lg hover:shadow-purple-500/25 transition-all duration-300 hover:scale-110 group z-10 opacity-0 group-hover:opacity-100"
                       aria-label="Next projects"
                     >
                       <svg className="w-5 h-5 group-hover:scale-110 group-hover:text-purple-300 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2.5}>
