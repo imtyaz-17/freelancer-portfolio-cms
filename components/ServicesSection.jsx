@@ -67,27 +67,29 @@ export default function ServicesSection({ data }) {
                 className="group"
               >
                 <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 p-8 border border-white/20 h-full group-hover:scale-105 group-hover:bg-white/90">
-                  {/* Service Icon */}
-                  <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-blue-500 rounded-2xl flex items-center justify-center mb-6 group-hover:from-purple-600 group-hover:to-blue-600 transition-all duration-300 shadow-lg">
-                    {service.icon && service.icon.asset?.url ? (
-                      <Image
-                        src={service.icon.asset.url}
-                        alt={service.icon.alt || service.title}
-                        width={32}
-                        height={32}
-                        className="w-8 h-8"
-                      />
-                    ) : (
-                      <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m-4 16l-4-16m4 16h4m-4 0H6" />
-                      </svg>
-                    )}
+                  {/* Service Icon and Title */}
+                  <div className="flex items-center gap-4 mb-6">
+                    <div className="w-16 h-16 rounded-2xl border-2 border-purple-500 group-hover:border-purple-600 transition-all duration-300 shadow-lg overflow-hidden flex-shrink-0">
+                      {service.icon && service.icon.asset?.url ? (
+                        <Image
+                          src={service.icon.asset.url}
+                          alt={service.icon.alt || service.title}
+                          width={64}
+                          height={64}
+                          className="w-full h-full object-cover"
+                        />
+                      ) : (
+                        <div className="w-full h-full flex items-center justify-center bg-gray-100">
+                          <svg className="w-8 h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m-4 16l-4-16m4 16h4m-4 0H6" />
+                          </svg>
+                        </div>
+                      )}
+                    </div>
+                    <h3 className="text-xl font-semibold text-gray-900 group-hover:text-blue-600 transition-colors flex-1">
+                      {service.title}
+                    </h3>
                   </div>
-
-                  {/* Service Content */}
-                  <h3 className="text-xl font-semibold text-gray-900 mb-4 group-hover:text-blue-600 transition-colors">
-                    {service.title}
-                  </h3>
                   
                   <p className="text-gray-600 mb-6 leading-relaxed">
                     {service.description}
