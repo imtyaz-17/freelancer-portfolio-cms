@@ -108,7 +108,7 @@ export default function TestimonialsSection({ data }) {
           </motion.div>
 
           {/* Multi-Testimonial Carousel Container */}
-          <motion.div variants={itemVariants} className="relative">
+          <motion.div variants={itemVariants} className="relative group">
             <div className="relative overflow-hidden">
               {/* Carousel Track */}
               <div className="relative">
@@ -213,7 +213,7 @@ export default function TestimonialsSection({ data }) {
                   onClick={prevSlide}
                   onMouseEnter={() => setIsAutoPlaying(false)}
                   onMouseLeave={() => setIsAutoPlaying(true)}
-                  className="absolute left-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full flex items-center justify-center text-white hover:bg-white/20 transition-all duration-300 hover:scale-110 group z-10"
+                  className="absolute left-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full flex items-center justify-center text-white hover:bg-white/20 transition-all duration-300 hover:scale-110 group z-10 opacity-0 group-hover:opacity-100"
                   aria-label="Previous testimonials"
                 >
                   <svg className="w-5 h-5 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -225,7 +225,7 @@ export default function TestimonialsSection({ data }) {
                   onClick={nextSlide}
                   onMouseEnter={() => setIsAutoPlaying(false)}
                   onMouseLeave={() => setIsAutoPlaying(true)}
-                  className="absolute right-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full flex items-center justify-center text-white hover:bg-white/20 transition-all duration-300 hover:scale-110 group z-10"
+                  className="absolute right-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full flex items-center justify-center text-white hover:bg-white/20 transition-all duration-300 hover:scale-110 group z-10 opacity-0 group-hover:opacity-100"
                   aria-label="Next testimonials"
                 >
                   <svg className="w-5 h-5 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
