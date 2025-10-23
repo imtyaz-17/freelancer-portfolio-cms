@@ -260,16 +260,6 @@ export default function TestimonialsSection({ data }) {
                 ))}
               </div>
 
-              {/* Progress Bar */}
-              <div className="mt-6 w-full bg-white/10 rounded-full h-1 overflow-hidden">
-                <motion.div
-                  className="h-full bg-gradient-to-r from-purple-400 to-pink-400 rounded-full"
-                  initial={{ width: "0%" }}
-                  animate={{ width: "100%" }}
-                  transition={{ duration: 4, ease: "linear" }}
-                  key={currentIndex}
-                />
-              </div>
             </div>
           </motion.div>
 
