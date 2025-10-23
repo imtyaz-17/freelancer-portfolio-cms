@@ -32,6 +32,14 @@ export default defineType({
       validation: (Rule) => Rule.required().max(500),
     }),
     defineField({
+      name: 'rating',
+      title: 'Rating',
+      type: 'number',
+      description: 'Client rating from 1 to 5 stars',
+      validation: (Rule) => Rule.required().min(1).max(5),
+      initialValue: 5,
+    }),
+    defineField({
       name: 'projectType',
       title: 'Project Type',
       type: 'string',

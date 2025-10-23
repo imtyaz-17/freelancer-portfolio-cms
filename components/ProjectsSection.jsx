@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion'
 import Image from 'next/image'
+import { useState, useEffect } from 'react'
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -25,7 +26,82 @@ const cardVariants = {
 }
 
 export default function ProjectsSection({ data }) {
+  const [currentIndex, setCurrentIndex] = useState(0)
+  const [isAutoPlaying, setIsAutoPlaying] = useState(true)
+  const [isDragging, setIsDragging] = useState(false)
+  const [cardsPerView, setCardsPerView] = useState(3)
+  const [touchStart, setTouchStart] = useState(null)
+  const [touchEnd, setTouchEnd] = useState(null)
+
   if (!data || !Array.isArray(data)) return null
+
+  // Responsive cards per view
+  useEffect(() => {
+    const updateCardsPerView = () => {
+      if (window.innerWidth < 768) {
+        setCardsPerView(1)
+      } else if (window.innerWidth < 1024) {
+        setCardsPerView(2)
+      } else {
+        setCardsPerView(3)
+      }
+    }
+
+    updateCardsPerView()
+    window.addEventListener('resize', updateCardsPerView)
+    return () => window.removeEventListener('resize', updateCardsPerView)
+  }, [])
+
+  // Calculate number of slides based on responsive cards per view
+  const totalSlides = Math.ceil(data.length / cardsPerView)
+
+  // Auto-play carousel
+  useEffect(() => {
+    if (!isAutoPlaying || isDragging || totalSlides <= 1) return
+
+    const interval = setInterval(() => {
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % totalSlides)
+    }, 7000) // 7 seconds for better reading time
+
+    return () => clearInterval(interval)
+  }, [totalSlides, isAutoPlaying, isDragging])
+
+  const nextSlide = () => {
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % totalSlides)
+  }
+
+  const prevSlide = () => {
+    setCurrentIndex((prevIndex) => (prevIndex - 1 + totalSlides) % totalSlides)
+  }
+
+  const goToSlide = (index) => {
+    setCurrentIndex(index)
+  }
+
+  // Touch handlers for mobile swipe
+  const handleTouchStart = (e) => {
+    setTouchEnd(null)
+    setTouchStart(e.targetTouches[0].clientX)
+  }
+
+  const handleTouchMove = (e) => {
+    setTouchEnd(e.targetTouches[0].clientX)
+  }
+
+  const handleTouchEnd = () => {
+    if (!touchStart || !touchEnd) return
+    
+    const distance = touchStart - touchEnd
+    const isLeftSwipe = distance > 50
+    const isRightSwipe = distance < -50
+
+    if (isLeftSwipe && currentIndex < totalSlides - 1) {
+      nextSlide()
+    }
+    if (isRightSwipe && currentIndex > 0) {
+      prevSlide()
+    }
+  }
 
   return (
     <section id="projects" className="py-20 bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 relative overflow-hidden">
@@ -57,16 +133,40 @@ export default function ProjectsSection({ data }) {
             <div className="w-24 h-1 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full mx-auto mt-8" />
           </motion.div>
 
-          {/* Projects Grid */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {data.map((project, index) => (
-              <motion.div
-                key={project._id}
-                variants={cardVariants}
-                whileHover="hover"
-                className="group"
-              >
-                <div className="bg-white/10 backdrop-blur-sm rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 overflow-hidden h-full border border-white/20 group-hover:bg-white/15">
+          {/* Projects Carousel Container */}
+          <motion.div variants={itemVariants} className="relative group">
+            <div className="relative overflow-hidden">
+              {/* Carousel Track */}
+              <div className="relative">
+                <motion.div
+                  className="flex"
+                  animate={{ x: `-${currentIndex * 100}%` }}
+                  transition={{ 
+                    duration: 0.6,
+                    ease: [0.4, 0.0, 0.2, 1]
+                  }}
+                  onMouseEnter={() => setIsAutoPlaying(false)}
+                  onMouseLeave={() => setIsAutoPlaying(true)}
+                  onTouchStart={handleTouchStart}
+                  onTouchMove={handleTouchMove}
+                  onTouchEnd={handleTouchEnd}
+                >
+                  {/* Create slides with multiple projects */}
+                  {Array.from({ length: totalSlides }, (_, slideIndex) => (
+                    <div key={slideIndex} className="w-full flex-shrink-0 px-2">
+                      <div className={`grid gap-8 ${
+                        cardsPerView === 1 ? 'grid-cols-1' : 
+                        cardsPerView === 2 ? 'grid-cols-1 md:grid-cols-2' : 
+                        'grid-cols-1 md:grid-cols-2 lg:grid-cols-3'
+                      }`}>
+                        {data.slice(slideIndex * cardsPerView, (slideIndex + 1) * cardsPerView).map((project, cardIndex) => (
+                          <motion.div
+                            key={project._id}
+                            variants={cardVariants}
+                            whileHover="hover"
+                            className="group h-full"
+                          >
+                            <div className="bg-gradient-to-br from-white/10 via-white/5 to-purple-900/10 backdrop-blur-sm rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 overflow-hidden h-full border border-white/20 group-hover:bg-white/15 group-hover:border-purple-400/30 group-hover:shadow-purple-500/10">
                   {/* Project Image */}
                   <div className="relative h-48 overflow-hidden">
                     {project.coverImage && project.coverImage.asset?.url ? (
@@ -223,12 +323,89 @@ export default function ProjectsSection({ data }) {
                           d="M9 5l7 7-7 7"
                         />
                       </svg>
-                    </a>
-                  </div>
+                            </a>
+                          </div>
+                        </div>
+                      </motion.div>
+                    ))}
+                      </div>
+                    </div>
+                  ))}
+                </motion.div>
+
+
+                {/* Navigation Arrows */}
+                {totalSlides > 1 && (
+                  <>
+                    <button
+                      onClick={prevSlide}
+                      onMouseEnter={() => setIsAutoPlaying(false)}
+                      onMouseLeave={() => setIsAutoPlaying(true)}
+                      className="absolute left-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full flex items-center justify-center text-white hover:bg-white/20 hover:border-purple-400/50 hover:shadow-lg hover:shadow-purple-500/25 transition-all duration-300 hover:scale-110 group z-10 opacity-0 group-hover:opacity-100"
+                      aria-label="Previous projects"
+                    >
+                      <svg className="w-5 h-5 group-hover:scale-110 group-hover:text-purple-300 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2.5}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+                      </svg>
+                    </button>
+
+                    <button
+                      onClick={nextSlide}
+                      onMouseEnter={() => setIsAutoPlaying(false)}
+                      onMouseLeave={() => setIsAutoPlaying(true)}
+                      className="absolute right-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full flex items-center justify-center text-white hover:bg-white/20 hover:border-purple-400/50 hover:shadow-lg hover:shadow-purple-500/25 transition-all duration-300 hover:scale-110 group z-10 opacity-0 group-hover:opacity-100"
+                      aria-label="Next projects"
+                    >
+                      <svg className="w-5 h-5 group-hover:scale-110 group-hover:text-purple-300 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2.5}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                      </svg>
+                    </button>
+                  </>
+                )}
+              </div>
+
+              {/* Modern Dots Indicator */}
+              {totalSlides > 1 && (
+                <div className="flex justify-center space-x-3 mt-10">
+                  {Array.from({ length: totalSlides }, (_, index) => (
+                    <button
+                      key={index}
+                      onClick={() => goToSlide(index)}
+                      onMouseEnter={() => setIsAutoPlaying(false)}
+                      onMouseLeave={() => setIsAutoPlaying(true)}
+                      className={`relative w-4 h-4 rounded-full transition-all duration-300 ${
+                        index === currentIndex
+                          ? 'bg-purple-400 scale-125'
+                          : 'bg-white/30 hover:bg-white/50'
+                      }`}
+                      aria-label={`Go to slide ${index + 1}`}
+                    >
+                      {index === currentIndex && (
+                        <motion.div
+                          layoutId="activeDot"
+                          className="absolute inset-0 bg-purple-400 rounded-full"
+                          transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                        />
+                      )}
+                    </button>
+                  ))}
                 </div>
-              </motion.div>
-            ))}
-          </div>
+              )}
+
+              {/* Progress Bar */}
+              {totalSlides > 1 && isAutoPlaying && (
+                <div className="mt-6 w-full bg-white/10 rounded-full h-1 overflow-hidden">
+                  <motion.div
+                    className="h-full bg-gradient-to-r from-purple-400 to-pink-400 rounded-full"
+                    initial={{ width: "0%" }}
+                    animate={{ width: "100%" }}
+                    transition={{ duration: 7, ease: "linear" }}
+                    key={currentIndex}
+                  />
+                </div>
+              )}
+            </div>
+          </motion.div>
         </motion.div>
       </div>
     </section>
