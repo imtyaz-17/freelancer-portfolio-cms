@@ -133,7 +133,7 @@ export default function TestimonialsSection({ data }) {
                             whileHover="hover"
                             className="group h-full"
                           >
-                            <div className="bg-white/5 backdrop-blur-sm rounded-3xl p-6 h-full flex flex-col border border-white/10 hover:border-purple-400/30 transition-all duration-300">
+                            <div className="bg-gradient-to-br from-white/10 via-white/5 to-purple-900/10 backdrop-blur-sm rounded-3xl p-6 h-full flex flex-col border border-white/20 hover:border-purple-400/50 hover:shadow-xl hover:shadow-purple-500/10 transition-all duration-300">
                               {/* Featured Badge */}
                               {testimonial.featured && (
                                 <div className="flex justify-center mb-4">
@@ -151,7 +151,7 @@ export default function TestimonialsSection({ data }) {
                                 <svg className="w-8 h-8 text-purple-400 mb-4" fill="currentColor" viewBox="0 0 24 24">
                                   <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h4v10h-10z"/>
                                 </svg>
-                                <blockquote className="text-gray-300 leading-relaxed mb-6 text-lg">
+                                <blockquote className="text-gray-200 leading-relaxed mb-6 text-lg">
                                   "{testimonial.quote}"
                                 </blockquote>
                               </div>
@@ -276,11 +276,11 @@ export default function TestimonialsSection({ data }) {
 
           {/* CTA */}
           <motion.div variants={itemVariants} className="text-center">
-            <div className="bg-white/5 backdrop-blur-sm rounded-3xl p-8 max-w-2xl mx-auto border border-white/10">
+            <div className="bg-gradient-to-br from-white/10 via-white/5 to-purple-900/10 backdrop-blur-sm rounded-3xl p-8 max-w-2xl mx-auto border border-white/20 shadow-xl shadow-purple-500/10">
               <h3 className="text-2xl font-semibold text-white mb-4">
                 Ready to join these satisfied clients?
               </h3>
-              <p className="text-gray-300 mb-6">
+              <p className="text-gray-200 mb-6">
                 Let's discuss how I can help your business achieve similar results.
               </p>
               <a
