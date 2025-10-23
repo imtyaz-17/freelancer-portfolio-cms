@@ -127,8 +127,8 @@ export default function FAQSection({ data }) {
                     transition={{ duration: 0.3, ease: 'easeInOut' }}
                     className="overflow-hidden"
                   >
-                    <div className="px-8 pb-6">
-                      <div className="prose prose-invert max-w-none text-gray-300 leading-relaxed">
+                    <div className="px-8 pb-6 bg-gradient-to-br from-white/5 via-white/2 to-purple-900/5 border-t border-white/5">
+                      <div className="prose prose-invert max-w-none text-gray-100 leading-relaxed">
                         {faq.answer?.map((block, blockIndex) => {
                           if (block._type === 'block') {
                             return (
@@ -140,7 +140,7 @@ export default function FAQSection({ data }) {
                                         {child.marks?.includes('strong') ? (
                                           <strong className="text-white font-semibold">{child.text}</strong>
                                         ) : child.marks?.includes('em') ? (
-                                          <em className="text-purple-200">{child.text}</em>
+                                          <em className="text-purple-300 font-medium">{child.text}</em>
                                         ) : (
                                           child.text
                                         )}
